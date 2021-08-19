@@ -1,4 +1,4 @@
-package model;
+package ru.forsh.voting_system_for_restaurants.model;
 
 import java.util.Date;
 

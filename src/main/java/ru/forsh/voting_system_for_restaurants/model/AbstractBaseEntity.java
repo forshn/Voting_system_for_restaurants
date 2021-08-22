@@ -24,7 +24,12 @@ public class AbstractBaseEntity {
         return id;
     }
 
-    boolean isNew() {
+    public boolean isNew() {
         return getId() == null;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ":" + id;
     }
 }

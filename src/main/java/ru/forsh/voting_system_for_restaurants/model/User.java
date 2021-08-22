@@ -1,5 +1,7 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
+import org.springframework.util.CollectionUtils;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
@@ -43,7 +45,7 @@ public class User extends AbstractNamedEntity {
     }
 
     public void setRoles(Collection<Role> roles) {
-        //this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
     public Date getRegistered() {

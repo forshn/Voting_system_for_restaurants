@@ -2,6 +2,7 @@ package ru.forsh.voting_system_for_restaurants.web.restaurant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import ru.forsh.voting_system_for_restaurants.model.Restaurant;
 import ru.forsh.voting_system_for_restaurants.repository.RestaurantRepository;
 import ru.forsh.voting_system_for_restaurants.web.SecurityUtil;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static ru.forsh.voting_system_for_restaurants.util.ValidationUtil.*;
 
+@Controller
 public class RestaurantRestController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -49,5 +51,11 @@ public class RestaurantRestController {
         int userId = SecurityUtil.authUserId();
         log.info("getAll for user {}", userId);
         return repository.getAll(userId);
+    }
+
+    public List<Restaurant> getAllWithMenu() {
+        int userId = SecurityUtil.authUserId();
+        log.info("getAllWithMenu for user {}", userId);
+        return repository.getAllWithMenu();
     }
 }

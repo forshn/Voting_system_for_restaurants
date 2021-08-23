@@ -18,8 +18,4 @@ public interface RestaurantRepository {
     List<Restaurant> getAll(int userId);
 
     List<Restaurant> getAllWithMenu();
-
-    default Restaurant getWithVotes(int id, int userId) {
-        throw new UnsupportedOperationException();
-    }
 }

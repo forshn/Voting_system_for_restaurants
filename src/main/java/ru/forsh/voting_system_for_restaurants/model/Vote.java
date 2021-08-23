@@ -1,14 +1,30 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
+import jakarta.validation.constraints.NotNull;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "vote")
 public class Vote extends AbstractBaseEntity {
 
-    private final Restaurant restaurant;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @NotNull
+    private Restaurant restaurant;
 
-    private final User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @NotNull
+    private User user;
 
-    private final Date voted = new Date();
+    @Column(name = "voted", nullable = false, columnDefinition = "timestamp default now()")
+    @NotNull
+    private Date voted = new Date();
+
+    public Vote() {
+    }
 
     public Vote(Integer id, Restaurant restaurant, User user) {
         super(id);
@@ -16,11 +32,34 @@ public class Vote extends AbstractBaseEntity {
         this.user = user;
     }
 
+    public Vote(Integer id, Restaurant restaurant, User user, Date voted) {
+        super(id);
+        this.restaurant = restaurant;
+        this.user = user;
+        this.voted = voted;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
     public User getUser() {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Date getVoted() {
         return voted;
+    }
+
+    public void setVoted(Date voted) {
+        this.voted = voted;
     }
 }

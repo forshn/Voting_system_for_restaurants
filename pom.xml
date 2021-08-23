@@ -16,7 +16,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <spring.version>5.3.9</spring.version>
-
         <spring.security.version>5.5.2</spring.security.version>
         <spring-data-jpa.version>2.5.4</spring-data-jpa.version>
         <jackson-json.version>2.12.4</jackson-json.version>
@@ -33,8 +32,12 @@
         <hibernate.version>5.5.6.Final</hibernate.version>
         <hibernate-validator.version>7.0.1.Final</hibernate-validator.version>
         <javax-el.version>3.0.1-b12</javax-el.version>
-    </properties>
 
+        <!--    Tests  -->
+        <junit.jupiter.version>5.7.2</junit.jupiter.version>
+        <assertj.version>3.20.2</assertj.version>
+        <hamcrest.version>2.2</hamcrest.version>
+    </properties>
 
     <build>
         <finalName>Voting_system_for_restaurants</finalName>
@@ -100,7 +103,6 @@
             <scope>runtime</scope>
         </dependency>
 
-
         <!--- ORM -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -116,6 +118,41 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jcache</artifactId>
             <version>${hibernate.version}</version>
+        </dependency>
+
+        <!--http://hibernate.org/validator/documentation/getting-started/#unified-expression-language-el-->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>${javax-el.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.0-M1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.3.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

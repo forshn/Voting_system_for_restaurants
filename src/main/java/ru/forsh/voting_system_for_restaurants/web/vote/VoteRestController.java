@@ -2,6 +2,7 @@ package ru.forsh.voting_system_for_restaurants.web.vote;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.forsh.voting_system_for_restaurants.model.Vote;
 import ru.forsh.voting_system_for_restaurants.repository.VoteRepository;
@@ -17,6 +18,7 @@ public class VoteRestController {
 
     private final VoteRepository repository;
 
+    @Autowired
     public VoteRestController(VoteRepository repository) {
         this.repository = repository;
     }
@@ -47,9 +49,13 @@ public class VoteRestController {
         checkNotFoundWithId(repository.delete(id, userId), id);
     }
 
-    public List<Vote> getAll() {
-        int userId = SecurityUtil.authUserId();
+    public List<Vote> getAllForUser(int userId) {
         log.info("getAll for user {}", userId);
         return repository.getAll(userId);
+    }
+
+    public List<Vote> getAllForRestaurant(int restaurantId) {
+        log.info("getAll for restaurant {}", restaurantId);
+        return repository.getAll(restaurantId);
     }
 }

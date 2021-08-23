@@ -16,13 +16,12 @@ VALUES ('User', 'user@gmail.com', 'password'),
 
 INSERT INTO user_role (role, user_id)
 VALUES ('ADMIN', 100001),
---        ('USER', 100001),
        ('USER', 100000);
 
-INSERT INTO restaurant (name, user_id)
-VALUES ('Кафе', 100001),
-       ('Бар', 100001),
-       ('Ресторан', 100001);
+INSERT INTO restaurant (name)
+VALUES ('Кафе'),
+       ('Бар'),
+       ('Ресторан');
 
 INSERT INTO dish (name, price, restaurant_id)
 VALUES ('Тако', 500, 100002),
@@ -34,3 +33,14 @@ VALUES ('Тако', 500, 100002),
        ('Паста Карбонара', 600, 100004),
        ('Гренки', 150, 100004),
        ('Салат Цезарь', 400, 100004);
+
+INSERT INTO vote (restaurant_id, user_id)
+VALUES (100002, 100000),
+       (100002, 100000),
+       (100003, 100000),
+       (100003, 100000),
+       (100003, 100000),
+       (100003, 100000),
+       (100004, 100000),
+       (100004, 100000),
+       (100004, 100000);

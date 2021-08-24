@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class AbstractNamedEntity extends AbstractBaseEntity{
+public abstract class AbstractNamedEntity extends AbstractBaseEntity{
     @NotBlank
     @Size(min = 2, max = 50)
     @Column(name = "name", nullable = false)

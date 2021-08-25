@@ -10,10 +10,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "restaurant")
 public class Restaurant extends AbstractNamedEntity {
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private List<Menu> menus;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "vote")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private List<Vote> votes;
 
     public Restaurant() {

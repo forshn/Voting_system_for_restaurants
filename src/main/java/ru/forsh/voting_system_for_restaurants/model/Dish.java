@@ -15,11 +15,8 @@ public class Dish extends AbstractNamedEntity {
     @Range(min = 1, max = 50_000)
     private int price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id", nullable = false)
-    @NotNull
-    private Restaurant restaurant;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="menu_id")
     private Menu menu;
 
     public Dish() {

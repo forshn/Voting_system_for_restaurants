@@ -10,8 +10,8 @@ import java.util.Set;
 @Entity
 @Table(name = "menu")
 public class Menu extends AbstractBaseEntity {
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="restaurant_id")
     @NotNull
     private Restaurant restaurant;
 
@@ -19,7 +19,7 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private LocalDate added;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dish")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     private Set<Dish> dishes;
 
     public Menu() {

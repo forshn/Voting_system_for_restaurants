@@ -1,12 +1,17 @@
 package ru.forsh.voting_system_for_restaurants.web.user;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.forsh.voting_system_for_restaurants.model.User;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping(value = AdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminRestController extends AbstractUserController {
+    static final String REST_URL = "/rest/admin/users";
 
     @Override
     public List<User> getAll() {

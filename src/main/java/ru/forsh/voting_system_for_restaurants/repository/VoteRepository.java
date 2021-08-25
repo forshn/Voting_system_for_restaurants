@@ -11,15 +11,5 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
-    Vote get(int id);
 
-    Vote save(Vote vote, int restaurant_id, int userId);
-
-    boolean delete(int id);
-
-    List<Vote> getAllByRestaurantAndDate(int restaurant_id, LocalDate date);
-
-    List<Vote> getAllByUserAndDate(int user_id, LocalDate date);
-
-    List<Vote> getAllByRestaurantAndUser(int restaurant_id, int user_id);
 }

@@ -2,6 +2,7 @@ package ru.forsh.voting_system_for_restaurants.web.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.repository.UserRepository;
 
@@ -12,7 +13,8 @@ import static ru.forsh.voting_system_for_restaurants.util.ValidationUtil.*;
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    private UserRepository repository;
+    @Autowired
+    protected UserRepository repository;
 
     public User get(int id) {
         log.info("get {}", id);

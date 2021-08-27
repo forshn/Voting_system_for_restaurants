@@ -8,10 +8,11 @@ import ru.forsh.voting_system_for_restaurants.model.User;
 
 import static ru.forsh.voting_system_for_restaurants.web.SecurityUtil.authUserId;
 
-@RestController
-@RequestMapping(value = ProfileRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+//@RestController
+//@RequestMapping(value = ProfileRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@Controller
 public class ProfileRestController extends AbstractUserController {
-    static final String REST_URL = "/rest/profile";
+  //  static final String REST_URL = "/rest/profile";
 
     public User get() {
         return super.get(authUserId());

@@ -1,4 +1,4 @@
-package web;
+package java.ru.forsh.voting_system_for_restaurants.web.user;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -9,15 +9,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.forsh.voting_system_for_restaurants.UserTestData;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 import ru.forsh.voting_system_for_restaurants.web.user.AdminRestController;
 
+import java.ru.forsh.voting_system_for_restaurants.web.UserTestData;
 import java.util.List;
 
+import static java.ru.forsh.voting_system_for_restaurants.web.UserTestData.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static ru.forsh.voting_system_for_restaurants.UserTestData.*;
+
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",

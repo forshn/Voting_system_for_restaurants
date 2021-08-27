@@ -1,9 +1,13 @@
-DELETE FROM user_role;
-DELETE FROM dish;
-DELETE FROM menu;
-DELETE FROM vote;
-DELETE FROM restaurant;
-DELETE FROM users;
+DELETE
+FROM user_role;
+DELETE
+FROM dish;
+DELETE
+FROM vote;
+DELETE
+FROM restaurant;
+DELETE
+FROM users;
 
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
@@ -19,10 +23,6 @@ INSERT INTO restaurant (name)
 VALUES ('Кафе'),
        ('Бар'),
        ('Ресторан');
-
-INSERT INTO menu (restaurant_id)
-VALUES (100002),
-       (100003),
 
 INSERT INTO dish (name, price, restaurant_id)
 VALUES ('Тако', 500, 100002),

@@ -1,4 +1,4 @@
-package ru.forsh.voting_system_for_restaurants;
+package java.ru.forsh.voting_system_for_restaurants.web;
 
 import ru.forsh.voting_system_for_restaurants.model.Role;
 import ru.forsh.voting_system_for_restaurants.model.User;

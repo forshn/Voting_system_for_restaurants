@@ -1,3 +1,4 @@
+/*
 package ru.forsh.voting_system_for_restaurants.web.vote;
 
 import org.slf4j.Logger;
@@ -58,4 +59,4 @@ public class VoteRestController {
         log.info("getAll for restaurant {}", restaurantId);
         return repository.getAll(restaurantId);
     }
-}
+}*/

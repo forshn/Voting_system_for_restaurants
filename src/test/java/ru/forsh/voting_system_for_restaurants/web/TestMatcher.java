@@ -1,10 +1,9 @@
-package ru.forsh.voting_system_for_restaurants;
+package java.ru.forsh.voting_system_for_restaurants.web;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 public class TestMatcher<T> {
     private final Class<T> clazz;

@@ -1,28 +1,34 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
+import static java.time.LocalDate.now;
+
 @Entity
 @Table(name = "vote")
 public class Vote extends AbstractBaseEntity {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @NotNull
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @Column(name = "voted", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
-    private LocalDate voted;
+    private LocalDate voted = now();
 
     public Vote() {
     }

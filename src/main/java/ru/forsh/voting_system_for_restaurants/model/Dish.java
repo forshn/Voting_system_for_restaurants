@@ -1,11 +1,14 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
+
+import static java.time.LocalDate.now;
 
 @Entity
 @Table(name = "dish")
@@ -15,13 +18,14 @@ public class Dish extends AbstractNamedEntity {
     @Range(min = 1, max = 50_000)
     private int price;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
     @Column(name = "added", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
-    private LocalDate added;
+    private LocalDate added = now();
 
     public Dish() {
     }
@@ -34,7 +38,7 @@ public class Dish extends AbstractNamedEntity {
     }
 
     public Dish(String name, int price, Restaurant restaurant) {
-        this(null, name, price, LocalDate.now(), restaurant);
+        this(null, name, price, now(), restaurant);
     }
 
     public int getPrice() {
@@ -68,21 +72,5 @@ public class Dish extends AbstractNamedEntity {
         if (!super.equals(o)) return false;
         Dish dish = (Dish) o;
         return price == dish.price && restaurant.equals(dish.restaurant) && added.equals(dish.added);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), price, restaurant, added);
-    }
-
-    @Override
-    public String toString() {
-        return "Dish{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", restaurant=" + restaurant +
-                ", added=" + added +
-                '}';
     }
 }

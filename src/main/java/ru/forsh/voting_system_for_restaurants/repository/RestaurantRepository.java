@@ -1,6 +1,7 @@
 package ru.forsh.voting_system_for_restaurants.repository;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.forsh.voting_system_for_restaurants.model.Restaurant;
 
 import java.time.LocalDate;
@@ -8,41 +9,42 @@ import java.util.List;
 
 @Repository
 public class RestaurantRepository {
-    private final CrudRestaurantRepository crudRepository;
+    private final CrudRestaurantRepository crudRestaurantRepository;
 
-    public RestaurantRepository(CrudRestaurantRepository crudRepository) {
-        this.crudRepository = crudRepository;
+    public RestaurantRepository(CrudRestaurantRepository crudRestaurantRepository) {
+        this.crudRestaurantRepository = crudRestaurantRepository;
     }
 
     public Restaurant get(int id) {
-        return crudRepository.findById(id).orElse(null);
+        return crudRestaurantRepository.findById(id).orElse(null);
     }
 
-    public Restaurant getWithMenu(int id) {
-        return crudRepository.getWithMenu(id);
-    }
-
-    public List<Restaurant> getWithMenuByDate(int id, LocalDate date) {
-        return crudRepository.getAllWithMenusByDate(id, date);
-    }
-
+    @Transactional
     public Restaurant save(Restaurant restaurant) {
-        return crudRepository.save(restaurant);
+        if (!restaurant.isNew() && get(restaurant.getId()) == null) {
+            return null;
+        }
+        return crudRestaurantRepository.save(restaurant);
     }
 
     public boolean delete(int id) {
-        return crudRepository.delete(id) != 0;
+        return crudRestaurantRepository.delete(id) != 0;
     }
 
+    // without dishes
     public List<Restaurant> getAll() {
-        return crudRepository.findAll();
+        return crudRestaurantRepository.findAll();
     }
 
-    public List<Restaurant> getAllWithMenu() {
-        return crudRepository.getAllWithMenus();
+    public Restaurant getWithDishes(int id) {
+        return crudRestaurantRepository.getWithDishes(id);
     }
 
-    public List<Restaurant> getAllWithMenuByDate(LocalDate date) {
-        return crudRepository.getAllWithMenusByDate(date);
+    public List<Restaurant> getWithDishesByDate(int id, LocalDate date) {
+        return crudRestaurantRepository.getWithDishesByDate(id, date);
+    }
+
+    public List<Restaurant> getAllWithDishesByDate(LocalDate date) {
+        return crudRestaurantRepository.getAllWithDishesByDate(date);
     }
 }

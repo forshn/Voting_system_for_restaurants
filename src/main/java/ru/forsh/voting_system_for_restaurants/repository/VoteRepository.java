@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.forsh.voting_system_for_restaurants.model.Vote;
 
+import java.util.List;
+
 @Repository
 public class VoteRepository {
     private final CrudVoteRepository crudVoteRepository;
@@ -16,10 +18,6 @@ public class VoteRepository {
         this.crudVoteRepository = crudVoteRepository;
         this.crudRestaurantRepository = crudRestaurantRepository;
         this.crudUserRepository = crudUserRepository;
-    }
-
-    public Vote save(Vote vote) {
-        return crudVoteRepository.save(vote);
     }
 
     @Transactional
@@ -38,5 +36,13 @@ public class VoteRepository {
 
     public Vote get(int id) {
         return crudVoteRepository.findById(id).orElse(null);
+    }
+
+    public List<Vote> getAllByUser(int userId) {
+        return crudVoteRepository.getByUser(userId);
+    }
+
+    public List<Vote> getAllByRestaurant(int restaurantId) {
+        return crudVoteRepository.getByRestaurant(restaurantId);
     }
 }

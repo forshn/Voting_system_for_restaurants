@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.lang.Nullable;
 import ru.forsh.voting_system_for_restaurants.model.Restaurant;
+import ru.forsh.voting_system_for_restaurants.repository.DishRepository;
 import ru.forsh.voting_system_for_restaurants.repository.RestaurantRepository;
 
 import java.time.LocalDate;
@@ -17,6 +20,9 @@ public abstract class AbstractRestaurantController {
 
     @Autowired
     protected RestaurantRepository repository;
+
+    @Autowired
+    protected DishRepository dishRepository;
 
     public Restaurant get(int id) {
         log.info("get restaurant with id={}", id);
@@ -48,17 +54,16 @@ public abstract class AbstractRestaurantController {
         return repository.getAll();
     }
 
-    public Restaurant getWithDishes(int id) {
-        log.info("getWithDishes with id={}", id);
-        return repository.getWithDishes(id);
-    }
-
-    public List<Restaurant> getWithDishesByDate(int id, LocalDate date) {
-        log.info("getWithDishes with id={} and ByDate={}", id, date);
+    public Restaurant getWithDishes(int id, @Nullable LocalDate date) {
+        if (date == null) {
+            log.info("getWithDishes with id={}", id);
+            return repository.getWithDishes(id);
+        }
+        log.info("getWithDishesByDate={} with id={}", date, id);
         return repository.getWithDishesByDate(id, date);
     }
 
-    @CacheEvict(value = "restaurants", allEntries = true)
+    @Cacheable("restaurants")
     public List<Restaurant> getAllWithDishesByDate(LocalDate date) {
         log.info("getAllWithDishesByDate={}", date);
         return repository.getAllWithDishesByDate(date);

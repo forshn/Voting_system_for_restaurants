@@ -1,5 +1,6 @@
 package ru.forsh.voting_system_for_restaurants.repository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.forsh.voting_system_for_restaurants.model.Restaurant;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Repository
 public class RestaurantRepository {
+    private static final Sort SORT_NAME = Sort.by(Sort.Direction.ASC, "name");
     private final CrudRestaurantRepository crudRestaurantRepository;
 
     public RestaurantRepository(CrudRestaurantRepository crudRestaurantRepository) {
@@ -33,14 +35,14 @@ public class RestaurantRepository {
 
     // without dishes
     public List<Restaurant> getAll() {
-        return crudRestaurantRepository.findAll();
+        return crudRestaurantRepository.findAll(SORT_NAME);
     }
 
     public Restaurant getWithDishes(int id) {
         return crudRestaurantRepository.getWithDishes(id);
     }
 
-    public List<Restaurant> getWithDishesByDate(int id, LocalDate date) {
+    public Restaurant getWithDishesByDate(int id, LocalDate date) {
         return crudRestaurantRepository.getWithDishesByDate(id, date);
     }
 

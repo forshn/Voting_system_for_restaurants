@@ -5,5 +5,5 @@
     <context:component-scan base-package="ru.forsh.**.repository"/>
 
     <import resource="spring-cache.xml"/>
-
+    <import resource="spring-security.xml"/>
 </beans>

@@ -1,8 +1,12 @@
 package ru.forsh.voting_system_for_restaurants.util;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
 import ru.forsh.voting_system_for_restaurants.model.AbstractBaseEntity;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
+
+import javax.lang.model.type.ErrorType;
 
 public class ValidationUtil {
     public static <T> T checkNotFoundWithId(T object, int id) {
@@ -38,5 +42,30 @@ public class ValidationUtil {
         } else if (entity.getId() != id) {
             throw new IllegalArgumentException(entity + " must be with id=" + id);
         }
+    }
+
+    //  http://stackoverflow.com/a/28565320/548473
+    public static Throwable getRootCause(Throwable t) {
+        Throwable result = t;
+        Throwable cause;
+
+        while (null != (cause = result.getCause()) && (result != cause)) {
+            result = cause;
+        }
+        return result;
+    }
+
+    public static String getMessage(Throwable e) {
+        return e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.getClass().getName();
+    }
+
+    public static Throwable logAndGetRootCause(Logger log, HttpServletRequest req, Exception e, boolean logStackTrace, ErrorType errorType) {
+        Throwable rootCause = ValidationUtil.getRootCause(e);
+        if (logStackTrace) {
+            log.error(errorType + " at request " + req.getRequestURL(), rootCause);
+        } else {
+            log.warn("{} at request  {}: {}", errorType, req.getRequestURL(), rootCause.toString());
+        }
+        return rootCause;
     }
 }

@@ -1,15 +1,31 @@
 package ru.forsh.voting_system_for_restaurants.web;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import ru.forsh.voting_system_for_restaurants.AuthorizedUser;
 import ru.forsh.voting_system_for_restaurants.model.AbstractBaseEntity;
 
-public class SecurityUtil {
-    private static int id = AbstractBaseEntity.START_SEQ;
+import static java.util.Objects.requireNonNull;
 
-    public static int authUserId() {
-        return id;
+public class SecurityUtil {
+
+    private SecurityUtil() {
     }
 
-    public static void setAuthUserId(int id) {
-        SecurityUtil.id = id;
+    public static AuthorizedUser safeGet() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) {
+            return null;
+        }
+        Object principal = auth.getPrincipal();
+        return (principal instanceof AuthorizedUser) ? (AuthorizedUser) principal : null;
+    }
+
+    public static AuthorizedUser get() {
+        return requireNonNull(safeGet(), "No authorized user found");
+    }
+
+    public static int authUserId() {
+        return get().getUser().id();
     }
 }

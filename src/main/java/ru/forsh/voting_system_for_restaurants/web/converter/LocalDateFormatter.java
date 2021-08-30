@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import static ru.forsh.voting_system_for_restaurants.util.DateTimeUtil.parseLocalDate;
+
 public class LocalDateFormatter implements Formatter<LocalDate> {
 
     @Override

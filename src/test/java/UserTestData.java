@@ -1,5 +1,6 @@
 import ru.forsh.voting_system_for_restaurants.model.Role;
 import ru.forsh.voting_system_for_restaurants.model.User;
+import ru.forsh.voting_system_for_restaurants.web.json.JsonUtil;
 
 import java.util.Collections;
 import java.util.Date;

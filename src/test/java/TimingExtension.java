@@ -1,5 +1,3 @@
-package java.ru.forsh.voting_system_for_restaurants.web;
-
 import org.junit.jupiter.api.extension.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

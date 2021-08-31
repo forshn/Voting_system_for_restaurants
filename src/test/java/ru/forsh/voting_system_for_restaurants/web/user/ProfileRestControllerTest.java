@@ -1,25 +1,25 @@
-package ru.forsh.voting_system_for_restaurants.web.restaurant;
+package ru.forsh.voting_system_for_restaurants.web.user;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.forsh.voting_system_for_restaurants.model.Restaurant;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 import ru.forsh.voting_system_for_restaurants.web.AbstractControllerTest;
 import ru.forsh.voting_system_for_restaurants.web.restaurant.RestaurantAdminRestController;
 
-import RestaurantTestData;
 import java.util.List;
 
-import static RestaurantTestData.*;
-import static UserTestData.NOT_FOUND;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class RestaurantAdminRestControllerTest extends AbstractControllerTest {
     protected static final Logger log = LoggerFactory.getLogger(RestaurantAdminRestControllerTest.class);

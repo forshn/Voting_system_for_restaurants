@@ -1,5 +1,3 @@
-package java.ru.forsh.voting_system_for_restaurants.web;
-
 import ru.forsh.voting_system_for_restaurants.model.Dish;
 import ru.forsh.voting_system_for_restaurants.model.Restaurant;
 
@@ -7,8 +5,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;
 
-import static java.ru.forsh.voting_system_for_restaurants.web.RestaurantTestData.restaurant1;
-import static java.ru.forsh.voting_system_for_restaurants.web.RestaurantTestData.restaurant2;
+import static RestaurantTestData.restaurant1;
+import static RestaurantTestData.restaurant2;
 import static ru.forsh.voting_system_for_restaurants.model.AbstractBaseEntity.START_SEQ;
 
 public class DishTestData {

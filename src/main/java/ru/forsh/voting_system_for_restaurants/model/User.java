@@ -5,13 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.util.CollectionUtils;
+import ru.forsh.voting_system_for_restaurants.HasIdAndEmail;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User extends AbstractNamedEntity {
+public class User extends AbstractNamedEntity implements HasIdAndEmail {
 
     @Column(name = "email", nullable = false, unique = true)
     @Email

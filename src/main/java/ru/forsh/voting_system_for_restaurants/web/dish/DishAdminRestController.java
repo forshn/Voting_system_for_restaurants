@@ -1,6 +1,5 @@
 package ru.forsh.voting_system_for_restaurants.web.dish;
 
-import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
@@ -8,8 +7,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ru.forsh.voting_system_for_restaurants.View;
 import ru.forsh.voting_system_for_restaurants.model.Dish;
 import ru.forsh.voting_system_for_restaurants.repository.DishRepository;
 
@@ -46,7 +47,7 @@ public class DishAdminRestController {
 
     @CacheEvict(value = "dishes", allEntries = true)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> createWithLocation(@Valid @RequestBody Dish dish, @PathVariable int restaurantId) {
+    public ResponseEntity<Dish> createWithLocation(@Validated(View.Web.class) @RequestBody Dish dish, @PathVariable int restaurantId) {
         log.info("create {}", dish);
         checkNew(dish);
         Dish created = dishRepository.save(dish, restaurantId);
@@ -58,7 +59,7 @@ public class DishAdminRestController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @CacheEvict(value = "dishes", allEntries = true)
-    public void update(@Valid@RequestBody Dish dish, @PathVariable int id, @PathVariable int restaurantId) {
+    public void update(@Validated(View.Web.class)@RequestBody Dish dish, @PathVariable int id, @PathVariable int restaurantId) {
         log.info("update dish {} with id={} to restaurant with id={}", dish, id, restaurantId);
         assureIdConsistent(dish, id);
         checkNotFoundWithId(dishRepository.save(dish, restaurantId), dish.getId());

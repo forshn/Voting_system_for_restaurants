@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import ru.forsh.voting_system_for_restaurants.AuthorizedUser;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.repository.UserRepository;
+import ru.forsh.voting_system_for_restaurants.to.UserTo;
 
 import java.util.List;
 

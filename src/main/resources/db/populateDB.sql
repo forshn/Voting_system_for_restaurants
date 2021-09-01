@@ -41,6 +41,5 @@ VALUES ('Тако', 500, 100002, current_date),
        ('Вчерашний тако', 500, 100003, current_date - integer '1');
 
 INSERT INTO vote (restaurant_id, user_id)
-VALUES (100002, 100000),
-       (100003, 100001);
+VALUES (100002, 100000);
 

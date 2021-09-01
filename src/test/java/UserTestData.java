@@ -9,7 +9,7 @@ import static ru.forsh.voting_system_for_restaurants.model.AbstractBaseEntity.ST
 
 public class UserTestData {
     public static final TestMatcher<User> USER_MATCHER = TestMatcher.usingIgnoringFieldsComparator(User.class,
-            "registered");
+            "registered", "votes");
 
     public static final int USER_ID = START_SEQ;
     public static final int ADMIN_ID = START_SEQ + 1;

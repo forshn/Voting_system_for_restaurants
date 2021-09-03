@@ -1,17 +1,14 @@
 package ru.forsh.voting_system_for_restaurants.util;
 
+
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.ValidatorFactory;
-import org.hibernate.exception.ConstraintViolationException;
+import jakarta.validation.*;
 import org.slf4j.Logger;
 import ru.forsh.voting_system_for_restaurants.HasId;
 import ru.forsh.voting_system_for_restaurants.util.exception.ErrorType;
 import ru.forsh.voting_system_for_restaurants.util.exception.IllegalRequestDataException;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 
-import javax.xml.validation.Validator;
 import java.util.Set;
 
 public class ValidationUtil {
@@ -59,7 +56,6 @@ public class ValidationUtil {
     }
 
     public static void assureIdConsistent(HasId bean, int id) {
-//      conservative when you reply, but accept liberally (http://stackoverflow.com/a/32728226/548473)
         if (bean.isNew()) {
             bean.setId(id);
         } else if (bean.id() != id) {
@@ -67,7 +63,6 @@ public class ValidationUtil {
         }
     }
 
-    //  http://stackoverflow.com/a/28565320/548473
     public static Throwable getRootCause(Throwable t) {
         Throwable result = t;
         Throwable cause;

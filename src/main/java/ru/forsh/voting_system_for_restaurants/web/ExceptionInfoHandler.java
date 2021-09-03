@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
-import java.util.Map;
-
 import ru.forsh.voting_system_for_restaurants.util.ValidationUtil;
 import ru.forsh.voting_system_for_restaurants.util.exception.ErrorInfo;
 import ru.forsh.voting_system_for_restaurants.util.exception.ErrorType;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
+
+import java.util.Map;
 
 import static ru.forsh.voting_system_for_restaurants.util.exception.ErrorType.*;
 
@@ -85,4 +84,4 @@ public class ExceptionInfoHandler {
                         details.length != 0 ? details : new String[]{ValidationUtil.getMessage(rootCause)})
                 );
 
-}
+        }

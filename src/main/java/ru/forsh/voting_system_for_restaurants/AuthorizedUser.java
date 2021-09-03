@@ -1,6 +1,8 @@
 package ru.forsh.voting_system_for_restaurants;
 
 import ru.forsh.voting_system_for_restaurants.model.User;
+import ru.forsh.voting_system_for_restaurants.to.UserTo;
+import ru.forsh.voting_system_for_restaurants.util.UserUtil;
 
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
     private static final long serialVersionUID = 1L;

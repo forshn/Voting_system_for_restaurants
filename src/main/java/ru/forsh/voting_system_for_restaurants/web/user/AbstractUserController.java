@@ -1,5 +1,7 @@
 package ru.forsh.voting_system_for_restaurants.web.user;
 
+
+import jakarta.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,6 @@ import ru.forsh.voting_system_for_restaurants.service.UserService;
 import ru.forsh.voting_system_for_restaurants.to.UserTo;
 import ru.forsh.voting_system_for_restaurants.util.UserUtil;
 
-import javax.xml.validation.Validator;
 import java.util.List;
 
 import static ru.forsh.voting_system_for_restaurants.util.ValidationUtil.assureIdConsistent;

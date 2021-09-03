@@ -12,9 +12,11 @@ import ru.forsh.voting_system_for_restaurants.AuthorizedUser;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.repository.UserRepository;
 import ru.forsh.voting_system_for_restaurants.to.UserTo;
+import ru.forsh.voting_system_for_restaurants.util.UserUtil;
 
 import java.util.List;
 
+import static ru.forsh.voting_system_for_restaurants.util.UserUtil.prepareToSave;
 import static ru.forsh.voting_system_for_restaurants.util.ValidationUtil.checkNotFound;
 import static ru.forsh.voting_system_for_restaurants.util.ValidationUtil.checkNotFoundWithId;
 

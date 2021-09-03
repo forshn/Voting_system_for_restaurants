@@ -1,5 +1,4 @@
-package ru.forsh.voting_system_for_restaurants.web.dish;
-
+package ru.forsh.voting_system_for_restaurants.web.vote;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -8,19 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.forsh.voting_system_for_restaurants.model.Dish;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 import ru.forsh.voting_system_for_restaurants.web.AbstractControllerTest;
-
+import ru.forsh.voting_system_for_restaurants.web.dish.DishAdminRestController;
+import ru.forsh.voting_system_for_restaurants.web.json.JsonUtil;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.forsh.voting_system_for_restaurants.web.vote.VoteRestController.REST_URL;
 
-public class DishRestControllerTest extends AbstractControllerTest {
-    protected static final Logger log = LoggerFactory.getLogger(DishRestControllerTest.class);
-
-    static final String REST_URL = "/rest/admin/restaurants/" + RESTAURANT_1_ID + "/dishes";
+public class VoteRestControllerTest extends AbstractControllerTest {
+    protected static final Logger log = LoggerFactory.getLogger(VoteRestControllerTest.class);
 
     @Autowired
     private DishAdminRestController controller;

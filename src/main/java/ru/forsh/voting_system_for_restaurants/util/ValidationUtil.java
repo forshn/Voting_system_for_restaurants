@@ -1,9 +1,16 @@
 package ru.forsh.voting_system_for_restaurants.util;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidatorFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
+import ru.forsh.voting_system_for_restaurants.HasId;
+import ru.forsh.voting_system_for_restaurants.util.exception.ErrorType;
+import ru.forsh.voting_system_for_restaurants.util.exception.IllegalRequestDataException;
+import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.*;
 import javax.xml.validation.Validator;
 import java.util.Set;
 
@@ -11,9 +18,7 @@ public class ValidationUtil {
     private static final Validator validator;
 
     static {
-        //  From Javadoc: implementations are thread-safe and instances are typically cached and reused.
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        //  From Javadoc: implementations of this interface must be thread-safe
         validator = factory.getValidator();
     }
 
@@ -21,7 +26,6 @@ public class ValidationUtil {
     }
 
     public static <T> void validate(T bean) {
-        // https://alexkosarev.name/2018/07/30/bean-validation-api/
         Set<ConstraintViolation<T>> violations = validator.validate(bean);
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);

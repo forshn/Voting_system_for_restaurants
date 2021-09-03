@@ -1,6 +1,25 @@
 package ru.forsh.voting_system_for_restaurants.web.dish;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ru.forsh.voting_system_for_restaurants.View;
+import ru.forsh.voting_system_for_restaurants.model.Dish;
+import ru.forsh.voting_system_for_restaurants.repository.DishRepository;
+
+import java.net.URI;
+import java.util.List;
+
+import static ru.forsh.voting_system_for_restaurants.util.ValidationUtil.*;
+
 @RestController
 @RequestMapping(value = DishAdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishAdminRestControllerTest {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.forsh.voting_system_for_restaurants.DishTestData;
 import ru.forsh.voting_system_for_restaurants.model.Dish;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 import ru.forsh.voting_system_for_restaurants.web.AbstractControllerTest;
@@ -17,6 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.forsh.voting_system_for_restaurants.DishTestData.*;
+import static ru.forsh.voting_system_for_restaurants.RestaurantTestData.RESTAURANT_2_ID;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.readFromJson;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;
+import static ru.forsh.voting_system_for_restaurants.UserTestData.admin;
 import static ru.forsh.voting_system_for_restaurants.web.vote.VoteRestController.REST_URL;
 
 public class VoteRestControllerTest extends AbstractControllerTest {

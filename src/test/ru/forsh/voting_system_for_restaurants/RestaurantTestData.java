@@ -1,7 +1,9 @@
+package ru.forsh.voting_system_for_restaurants;
+
 import ru.forsh.voting_system_for_restaurants.model.Restaurant;
 
-import static DishTestData.dishes1;
-import static DishTestData.dishes2;
+import static ru.forsh.voting_system_for_restaurants.DishTestData.dishes1;
+import static ru.forsh.voting_system_for_restaurants.DishTestData.dishes2;
 import static ru.forsh.voting_system_for_restaurants.model.AbstractBaseEntity.START_SEQ;
 
 public class RestaurantTestData {

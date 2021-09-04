@@ -1,3 +1,5 @@
+package ru.forsh.voting_system_for_restaurants;
+
 import ru.forsh.voting_system_for_restaurants.model.Role;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.web.json.JsonUtil;

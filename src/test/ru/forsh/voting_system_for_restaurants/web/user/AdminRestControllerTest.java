@@ -16,6 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.readFromJson;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;
+import static ru.forsh.voting_system_for_restaurants.UserTestData.*;
 import static ru.forsh.voting_system_for_restaurants.util.exception.ErrorType.VALIDATION_ERROR;
 import static ru.forsh.voting_system_for_restaurants.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;
 

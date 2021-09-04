@@ -1,9 +1,12 @@
+package ru.forsh.voting_system_for_restaurants;
+
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.readListFromJsonMvcResult;
 
 public class TestMatcher<T> {
     private final Class<T> clazz;

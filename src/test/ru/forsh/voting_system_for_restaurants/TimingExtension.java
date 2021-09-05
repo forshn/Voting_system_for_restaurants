@@ -3,8 +3,6 @@ package ru.forsh.voting_system_for_restaurants;
 import org.junit.jupiter.api.extension.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
 import org.springframework.util.StopWatch;
 
 public class TimingExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback, BeforeAllCallback, AfterAllCallback {

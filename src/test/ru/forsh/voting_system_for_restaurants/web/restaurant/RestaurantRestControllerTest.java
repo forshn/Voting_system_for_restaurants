@@ -1,8 +1,6 @@
 package ru.forsh.voting_system_for_restaurants.web.restaurant;
 
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -25,7 +23,6 @@ import static ru.forsh.voting_system_for_restaurants.UserTestData.admin;
 import static ru.forsh.voting_system_for_restaurants.web.restaurant.RestaurantAdminRestController.REST_URL;
 
 public class RestaurantRestControllerTest extends AbstractControllerTest {
-    protected static final Logger log = LoggerFactory.getLogger(RestaurantRestControllerTest.class);
 
     @Autowired
     private RestaurantAdminRestController controller;

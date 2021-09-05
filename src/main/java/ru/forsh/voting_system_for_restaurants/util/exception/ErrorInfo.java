@@ -6,7 +6,7 @@ public class ErrorInfo {
     private final String typeMessage;
     private final String[] details;
 
-    public ErrorInfo(CharSequence url, ru.forsh.voting_system_for_restaurants.util.exception.ErrorInfo type, String typeMessage, String... details) {
+    public ErrorInfo(CharSequence url, ErrorType type, String typeMessage, String... details) {
         this.url = url.toString();
         this.type = type;
         this.typeMessage = typeMessage;

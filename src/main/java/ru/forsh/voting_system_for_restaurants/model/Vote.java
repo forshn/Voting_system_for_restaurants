@@ -6,7 +6,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 import static java.time.LocalDate.now;
 

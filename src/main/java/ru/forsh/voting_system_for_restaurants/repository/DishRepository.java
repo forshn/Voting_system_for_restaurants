@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.forsh.voting_system_for_restaurants.model.Dish;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -23,7 +22,7 @@ public class DishRepository {
         if (!dish.isNew() && get(dish.getId()) == null) {
             return null;
         }
-        dish.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
+        dish.setRestaurant(crudRestaurantRepository.getById(restaurantId));
         return crudDishRepository.save(dish);
     }
 

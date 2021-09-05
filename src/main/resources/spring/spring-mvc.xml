@@ -44,7 +44,6 @@
         </bean>
     </mvc:interceptors>
 
-    <!--    https://stackoverflow.com/a/23615478/548473-->
     <bean id="defaultValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
 </beans>

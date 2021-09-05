@@ -12,7 +12,6 @@ import ru.forsh.voting_system_for_restaurants.repository.VoteRepository;
 import ru.forsh.voting_system_for_restaurants.util.DateTimeUtil;
 import ru.forsh.voting_system_for_restaurants.util.exception.ApplicationException;
 import ru.forsh.voting_system_for_restaurants.util.exception.ErrorType;
-import ru.forsh.voting_system_for_restaurants.util.exception.VoteException;
 
 import java.net.URI;
 import java.time.LocalDate;

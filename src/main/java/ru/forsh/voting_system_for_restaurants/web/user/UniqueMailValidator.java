@@ -3,6 +3,7 @@ package ru.forsh.voting_system_for_restaurants.web.user;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
+import ru.forsh.voting_system_for_restaurants.HasIdAndEmail;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.repository.UserRepository;
 import ru.forsh.voting_system_for_restaurants.web.ExceptionInfoHandler;

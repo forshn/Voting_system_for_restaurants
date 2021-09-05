@@ -1,8 +1,6 @@
-package ru.forsh.voting_system_for_restaurants.web.vote;
+package ru.forsh.voting_system_for_restaurants.web.dish;
 
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -11,7 +9,6 @@ import ru.forsh.voting_system_for_restaurants.DishTestData;
 import ru.forsh.voting_system_for_restaurants.model.Dish;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 import ru.forsh.voting_system_for_restaurants.web.AbstractControllerTest;
-import ru.forsh.voting_system_for_restaurants.web.dish.DishAdminRestController;
 import ru.forsh.voting_system_for_restaurants.web.json.JsonUtil;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,14 +16,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.forsh.voting_system_for_restaurants.DishTestData.*;
+import static ru.forsh.voting_system_for_restaurants.RestaurantTestData.RESTAURANT_1_ID;
 import static ru.forsh.voting_system_for_restaurants.RestaurantTestData.RESTAURANT_2_ID;
 import static ru.forsh.voting_system_for_restaurants.TestUtil.readFromJson;
 import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;
+import static ru.forsh.voting_system_for_restaurants.UserTestData.NOT_FOUND;
 import static ru.forsh.voting_system_for_restaurants.UserTestData.admin;
-import static ru.forsh.voting_system_for_restaurants.web.vote.VoteRestController.REST_URL;
 
-public class VoteRestControllerTest extends AbstractControllerTest {
-    protected static final Logger log = LoggerFactory.getLogger(VoteRestControllerTest.class);
+public class DishRestControllerTest extends AbstractControllerTest {
+
+    static final String REST_URL = "/rest/admin/restaurants/" + RESTAURANT_1_ID + "/dishes";
 
     @Autowired
     private DishAdminRestController controller;

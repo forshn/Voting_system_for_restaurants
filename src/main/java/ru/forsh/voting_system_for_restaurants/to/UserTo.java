@@ -3,6 +3,7 @@ package ru.forsh.voting_system_for_restaurants.to;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import ru.forsh.voting_system_for_restaurants.HasIdAndEmail;
 
 import java.io.Serializable;
 

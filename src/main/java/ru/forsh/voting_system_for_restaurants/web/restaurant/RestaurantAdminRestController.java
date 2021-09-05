@@ -1,6 +1,5 @@
 package ru.forsh.voting_system_for_restaurants.web.restaurant;
 
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +43,7 @@ public class RestaurantAdminRestController extends AbstractRestaurantController 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@Validated(View.Web.class)@RequestBody Restaurant restaurant, @PathVariable int id) {
+    public void update(@Validated(View.Web.class) @RequestBody Restaurant restaurant, @PathVariable int id) {
         super.update(restaurant, id);
     }
 

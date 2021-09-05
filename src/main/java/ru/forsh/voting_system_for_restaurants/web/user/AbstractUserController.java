@@ -1,13 +1,12 @@
 package ru.forsh.voting_system_for_restaurants.web.user;
 
-
-import jakarta.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.BindException;
 import org.springframework.validation.DataBinder;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import ru.forsh.voting_system_for_restaurants.HasId;
@@ -84,7 +83,7 @@ public abstract class AbstractUserController {
     protected void validateBeforeUpdate(HasId user, int id) throws BindException {
         assureIdConsistent(user, id);
         DataBinder binder = new DataBinder(user);
-        binder.addValidators(emailValidator, (org.springframework.validation.Validator) validator);
+        binder.addValidators(emailValidator, validator);
         binder.validate(View.Web.class);
         if (binder.getBindingResult().hasErrors()) {
             throw new BindException(binder.getBindingResult());

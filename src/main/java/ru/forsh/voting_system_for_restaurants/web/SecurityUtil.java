@@ -3,7 +3,6 @@ package ru.forsh.voting_system_for_restaurants.web;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.forsh.voting_system_for_restaurants.AuthorizedUser;
-import ru.forsh.voting_system_for_restaurants.model.AbstractBaseEntity;
 
 import static java.util.Objects.requireNonNull;
 

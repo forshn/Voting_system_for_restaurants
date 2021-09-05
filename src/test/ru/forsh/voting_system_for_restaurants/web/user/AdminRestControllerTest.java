@@ -11,8 +11,8 @@ import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 import ru.forsh.voting_system_for_restaurants.web.AbstractControllerTest;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.forsh.voting_system_for_restaurants.TestUtil.readFromJson;
 import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;

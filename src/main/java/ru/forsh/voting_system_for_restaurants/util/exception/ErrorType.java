@@ -3,7 +3,7 @@ package ru.forsh.voting_system_for_restaurants.util.exception;
 import org.springframework.http.HttpStatus;
 
 public enum ErrorType {
-    APP_ERROR("error.appError", HttpStatus.INTERNAL_SERVER_ERROR),
+    APP_ERROR("error.applicationError", HttpStatus.INTERNAL_SERVER_ERROR),
     DATA_NOT_FOUND("error.dataNotFound", HttpStatus.UNPROCESSABLE_ENTITY),
     DATA_ERROR("error.dataError", HttpStatus.CONFLICT),
     VALIDATION_ERROR("error.validationError", HttpStatus.UNPROCESSABLE_ENTITY),

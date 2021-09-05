@@ -21,11 +21,11 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     Restaurant getWithDishes(@Param("id") int id);
 
     @Query("""
-           SELECT r FROM Restaurant r 
-           LEFT JOIN FETCH r.dishes d            
-           WHERE r.id =:id AND d.added=:date
-           ORDER BY d.added DESC
-           """)
+            SELECT r FROM Restaurant r 
+            LEFT JOIN FETCH r.dishes d            
+            WHERE r.id =:id AND d.added=:date
+            ORDER BY d.added DESC
+            """)
     Restaurant getWithDishesByDate(@Param("id") int id, @Param("date") LocalDate date);
 
     @Query("""

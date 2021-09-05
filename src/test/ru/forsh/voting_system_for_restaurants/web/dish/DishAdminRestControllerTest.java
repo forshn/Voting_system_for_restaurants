@@ -1,76 +1,108 @@
 package ru.forsh.voting_system_for_restaurants.web.dish;
 
 
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.forsh.voting_system_for_restaurants.View;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.forsh.voting_system_for_restaurants.DishTestData;
 import ru.forsh.voting_system_for_restaurants.model.Dish;
-import ru.forsh.voting_system_for_restaurants.repository.DishRepository;
+import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
+import ru.forsh.voting_system_for_restaurants.web.AbstractControllerTest;
+import ru.forsh.voting_system_for_restaurants.web.json.JsonUtil;
 
-import java.net.URI;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.forsh.voting_system_for_restaurants.DishTestData.*;
+import static ru.forsh.voting_system_for_restaurants.RestaurantTestData.RESTAURANT_1_ID;
+import static ru.forsh.voting_system_for_restaurants.RestaurantTestData.RESTAURANT_2_ID;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.readFromJson;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;
+import static ru.forsh.voting_system_for_restaurants.UserTestData.NOT_FOUND;
+import static ru.forsh.voting_system_for_restaurants.UserTestData.admin;
 
-import static ru.forsh.voting_system_for_restaurants.util.ValidationUtil.*;
+public class DishRestControllerTest extends AbstractControllerTest {
+    protected static final Logger log = LoggerFactory.getLogger(DishRestControllerTest.class);
 
-@RestController
-@RequestMapping(value = DishAdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class DishAdminRestControllerTest {
-    static final String REST_URL = "/rest/admin/restaurants/{restaurantId}/dishes";
+    static final String REST_URL = "/rest/admin/restaurants/" + RESTAURANT_1_ID + "/dishes";
 
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private DishAdminRestController controller;
 
-    private final DishRepository dishRepository;
-
-    public DishAdminRestController(DishRepository dishRepository) {
-        this.dishRepository = dishRepository;
+    @Test
+    void get() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + "/" + DISH_1_ID)
+                .with(userHttpBasic(admin)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(DISH_MATCHER.contentJson(dish1));
     }
 
-    @Cacheable("dishes")
-    @GetMapping
-    public List<Dish> getAll(@PathVariable int restaurantId) {
-        log.info("getAll dishes for restaurantId={}", restaurantId);
-        return dishRepository.getAll(restaurantId);
+    @Test
+    void getUnauth() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + "/" + DISH_1_ID))
+                .andExpect(status().isUnauthorized());
     }
 
-    @GetMapping("/{id}")
-    public Dish get(@PathVariable int id) {
-        log.info("get dish with id={}", id);
-        return checkNotFoundWithId(dishRepository.get(id), id);
+    @Test
+    void getNotFound() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + "/" + NOT_FOUND)
+                .with(userHttpBasic(admin)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
     }
 
-    @CacheEvict(value = "dishes", allEntries = true)
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> createWithLocation(@Validated(View.Web.class) @RequestBody Dish dish, @PathVariable int restaurantId) {
-        log.info("create {}", dish);
-        checkNew(dish);
-        Dish created = dishRepository.save(dish, restaurantId);
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/restaurants/" + restaurantId + "/{id}")
-                .buildAndExpand(created.getId()).toUri();
-        return ResponseEntity.created(uriOfNewResource).body(created);
+    @Test
+    void delete() throws Exception {
+        perform(MockMvcRequestBuilders.delete(REST_URL + "/" + DISH_1_ID)
+                .with(userHttpBasic(admin)))
+                .andExpect(status().isNoContent());
+        assertThrows(NotFoundException.class, () -> controller.get(DISH_1_ID));
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @CacheEvict(value = "dishes", allEntries = true)
-    public void update(@Validated(View.Web.class) @RequestBody Dish dish, @PathVariable int id, @PathVariable int restaurantId) {
-        log.info("update dish {} with id={} to restaurant with id={}", dish, id, restaurantId);
-        assureIdConsistent(dish, id);
-        checkNotFoundWithId(dishRepository.save(dish, restaurantId), dish.getId());
+    @Test
+    void deleteNotFound() throws Exception {
+        perform(MockMvcRequestBuilders.delete(REST_URL + "/" + NOT_FOUND)
+                .with(userHttpBasic(admin)))
+                .andExpect(status().isUnprocessableEntity());
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CacheEvict(value = "dishes", allEntries = true)
-    public void delete(@PathVariable int id) {
-        log.info("delete dish with id={}", id);
-        checkNotFoundWithId(dishRepository.delete(id), id);
+    @Test
+    void update() throws Exception {
+        Dish updated = DishTestData.getUpdated();
+        perform(MockMvcRequestBuilders.put(REST_URL + "/" + DISH_1_ID).contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated))
+                .with(userHttpBasic(admin)))
+                .andExpect(status().isNoContent());
+        DISH_MATCHER.assertMatch(controller.get(DISH_1_ID), DishTestData.getUpdated());
+    }
+
+    @Test
+    void createWithLocation() throws Exception {
+        Dish newDish = DishTestData.getNew();
+        ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newDish))
+                .with(userHttpBasic(admin)));
+        Dish created = readFromJson(action, Dish.class);
+        int newId = created.id();
+        newDish.setId(newId);
+        DISH_MATCHER.assertMatch(created, newDish);
+        DISH_MATCHER.assertMatch(controller.get(newId), newDish);
+    }
+
+    @Test
+    void getAll() throws Exception {
+        perform(MockMvcRequestBuilders.get("/rest/admin/restaurants/" + RESTAURANT_2_ID + "/dishes")
+                .with(userHttpBasic(admin)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(DISH_MATCHER.contentJson(dish3, dish4, dish5));
     }
 }

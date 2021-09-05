@@ -14,6 +14,10 @@ import ru.forsh.voting_system_for_restaurants.web.json.JsonUtil;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.readFromJson;
+import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;
+import static ru.forsh.voting_system_for_restaurants.UserTestData.*;
+import static ru.forsh.voting_system_for_restaurants.util.exception.ErrorType.VALIDATION_ERROR;
 import static ru.forsh.voting_system_for_restaurants.web.user.ProfileRestController.REST_URL;
 
 class ProfileRestControllerTest extends AbstractControllerTest {
@@ -82,19 +86,5 @@ class ProfileRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(errorType(VALIDATION_ERROR));
-    }
-
-    @Test
-    @Transactional(propagation = Propagation.NEVER)
-    void updateDuplicate() throws Exception {
-        UserTo updatedTo = new UserTo(null, "newName", "admin@gmail.com", "newPassword");
-
-        perform(MockMvcRequestBuilders.put(REST_URL).contentType(MediaType.APPLICATION_JSON)
-                .with(userHttpBasic(user))
-                .content(JsonUtil.writeValue(updatedTo)))
-                .andDo(print())
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(errorType(VALIDATION_ERROR))
-                .andExpect(detailMessage(EXCEPTION_DUPLICATE_EMAIL));
     }
 }

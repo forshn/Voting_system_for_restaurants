@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import ru.forsh.voting_system_for_restaurants.model.Role;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
@@ -20,7 +18,6 @@ import static ru.forsh.voting_system_for_restaurants.TestUtil.readFromJson;
 import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;
 import static ru.forsh.voting_system_for_restaurants.UserTestData.*;
 import static ru.forsh.voting_system_for_restaurants.util.exception.ErrorType.VALIDATION_ERROR;
-import static ru.forsh.voting_system_for_restaurants.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;
 
 class AdminRestControllerTest extends AbstractControllerTest {
 
@@ -147,34 +144,5 @@ class AdminRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(errorType(VALIDATION_ERROR));
-    }
-
-    @Test
-    @Transactional(propagation = Propagation.NEVER)
-    void updateDuplicate() throws Exception {
-        User updated = new User(user);
-        updated.setEmail("admin@gmail.com");
-        perform(MockMvcRequestBuilders.put(REST_URL + USER_ID)
-                .contentType(MediaType.APPLICATION_JSON)
-                .with(userHttpBasic(admin))
-                .content(jsonWithPassword(updated, "password")))
-                .andDo(print())
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(errorType(VALIDATION_ERROR))
-                .andExpect(detailMessage(EXCEPTION_DUPLICATE_EMAIL));
-    }
-
-    @Test
-    @Transactional(propagation = Propagation.NEVER)
-    void createDuplicate() throws Exception {
-        User expected = new User(null, "New", "user@yandex.ru", "newPass", Role.USER, Role.ADMIN);
-        perform(MockMvcRequestBuilders.post(REST_URL)
-                .contentType(MediaType.APPLICATION_JSON)
-                .with(userHttpBasic(admin))
-                .content(jsonWithPassword(expected, "newPass")))
-                .andDo(print())
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(errorType(VALIDATION_ERROR))
-                .andExpect(detailMessage(EXCEPTION_DUPLICATE_EMAIL));
     }
 }

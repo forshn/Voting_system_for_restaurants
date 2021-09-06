@@ -14,8 +14,8 @@ import java.time.LocalDate;
 import static java.time.LocalDate.now;
 
 @Entity
-@Table(name = "dish")
-public class Dish extends AbstractNamedEntity {
+@Table(name = "meal")
+public class Meal extends AbstractNamedEntity {
 
     @Column(name = "price", nullable = false)
     @Range(min = 1, max = 50_000)
@@ -32,21 +32,21 @@ public class Dish extends AbstractNamedEntity {
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
     private LocalDate added = now();
 
-    public Dish() {
+    public Meal() {
     }
 
-    public Dish(Integer id, String name, int price, LocalDate added, Restaurant restaurant) {
+    public Meal(Integer id, String name, int price, LocalDate added, Restaurant restaurant) {
         super(id, name);
         this.price = price;
         this.added = added;
         this.restaurant = restaurant;
     }
 
-    public Dish(String name, int price, Restaurant restaurant) {
+    public Meal(String name, int price, Restaurant restaurant) {
         this(null, name, price, now(), restaurant);
     }
 
-    public Dish(Dish d) {
+    public Meal(Meal d) {
         this(d.getId(), d.getName(), d.getPrice(), d.getAdded(), d.getRestaurant());
     }
 
@@ -79,7 +79,7 @@ public class Dish extends AbstractNamedEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Dish dish = (Dish) o;
-        return price == dish.price && restaurant.equals(dish.restaurant) && added.equals(dish.added);
+        Meal meal = (Meal) o;
+        return price == meal.price && restaurant.equals(meal.restaurant) && added.equals(meal.added);
     }
 }

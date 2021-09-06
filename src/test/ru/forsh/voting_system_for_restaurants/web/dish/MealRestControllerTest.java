@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.forsh.voting_system_for_restaurants.DishTestData;
-import ru.forsh.voting_system_for_restaurants.model.Dish;
+import ru.forsh.voting_system_for_restaurants.model.Meal;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 import ru.forsh.voting_system_for_restaurants.web.AbstractControllerTest;
 import ru.forsh.voting_system_for_restaurants.web.json.JsonUtil;
@@ -23,7 +23,7 @@ import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;
 import static ru.forsh.voting_system_for_restaurants.UserTestData.NOT_FOUND;
 import static ru.forsh.voting_system_for_restaurants.UserTestData.admin;
 
-public class DishRestControllerTest extends AbstractControllerTest {
+public class MealRestControllerTest extends AbstractControllerTest {
 
     static final String REST_URL = "/rest/admin/restaurants/" + RESTAURANT_1_ID + "/dishes";
 
@@ -36,7 +36,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(admin)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(DISH_MATCHER.contentJson(dish1));
+                .andExpect(DISH_MATCHER.contentJson(MEAL_1));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
 
     @Test
     void update() throws Exception {
-        Dish updated = DishTestData.getUpdated();
+        Meal updated = DishTestData.getUpdated();
         perform(MockMvcRequestBuilders.put(REST_URL + "/" + DISH_1_ID).contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated))
                 .with(userHttpBasic(admin)))
@@ -80,16 +80,16 @@ public class DishRestControllerTest extends AbstractControllerTest {
 
     @Test
     void createWithLocation() throws Exception {
-        Dish newDish = DishTestData.getNew();
+        Meal newMeal = DishTestData.getNew();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(newDish))
+                .content(JsonUtil.writeValue(newMeal))
                 .with(userHttpBasic(admin)));
-        Dish created = readFromJson(action, Dish.class);
+        Meal created = readFromJson(action, Meal.class);
         int newId = created.id();
-        newDish.setId(newId);
-        DISH_MATCHER.assertMatch(created, newDish);
-        DISH_MATCHER.assertMatch(controller.get(newId), newDish);
+        newMeal.setId(newId);
+        DISH_MATCHER.assertMatch(created, newMeal);
+        DISH_MATCHER.assertMatch(controller.get(newId), newMeal);
     }
 
     @Test
@@ -99,6 +99,6 @@ public class DishRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(DISH_MATCHER.contentJson(dish3, dish4, dish5));
+                .andExpect(DISH_MATCHER.contentJson(MEAL_3, MEAL_4, MEAL_5));
     }
 }

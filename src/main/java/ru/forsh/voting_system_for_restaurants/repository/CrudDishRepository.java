@@ -5,17 +5,17 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import ru.forsh.voting_system_for_restaurants.model.Dish;
+import ru.forsh.voting_system_for_restaurants.model.Meal;
 
 import java.util.List;
 
 @Transactional(readOnly = true)
-public interface CrudDishRepository extends JpaRepository<Dish, Integer> {
+public interface CrudDishRepository extends JpaRepository<Meal, Integer> {
     @Modifying
     @Transactional
-    @Query("DELETE FROM Dish d WHERE d.id=:id")
+    @Query("DELETE FROM Meal d WHERE d.id=:id")
     int delete(@Param("id") int id);
 
-    @Query("SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId")
-    List<Dish> getAllByRestaurantId(@Param("restaurantId") int restaurantId);
+    @Query("SELECT d FROM Meal d WHERE d.restaurant.id=:restaurantId")
+    List<Meal> getAllByRestaurantId(@Param("restaurantId") int restaurantId);
 }

@@ -2,7 +2,7 @@ package ru.forsh.voting_system_for_restaurants.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.forsh.voting_system_for_restaurants.model.Dish;
+import ru.forsh.voting_system_for_restaurants.model.Meal;
 
 import java.util.List;
 
@@ -18,23 +18,23 @@ public class DishRepository {
     }
 
     @Transactional
-    public Dish save(Dish dish, int restaurantId) {
-        if (!dish.isNew() && get(dish.getId()) == null) {
+    public Meal save(Meal meal, int restaurantId) {
+        if (!meal.isNew() && get(meal.getId()) == null) {
             return null;
         }
-        dish.setRestaurant(crudRestaurantRepository.getById(restaurantId));
-        return crudDishRepository.save(dish);
+        meal.setRestaurant(crudRestaurantRepository.getById(restaurantId));
+        return crudDishRepository.save(meal);
     }
 
     public boolean delete(int id) {
         return crudDishRepository.delete(id) != 0;
     }
 
-    public Dish get(int id) {
+    public Meal get(int id) {
         return crudDishRepository.findById(id).orElse(null);
     }
 
-    public List<Dish> getAll(int restaurantId) {
+    public List<Meal> getAll(int restaurantId) {
         return crudDishRepository.getAllByRestaurantId(restaurantId);
     }
 }

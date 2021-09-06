@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS user_role;
-DROP TABLE IF EXISTS dish;
+DROP TABLE IF EXISTS meal;
 DROP TABLE IF EXISTS vote;
 DROP TABLE IF EXISTS menu;
 DROP TABLE IF EXISTS restaurant;
@@ -34,7 +34,7 @@ CREATE TABLE restaurant
     CONSTRAINT restaurant_name_idx UNIQUE (name)
 );
 
-CREATE TABLE dish
+CREATE TABLE meal
 (
     id      INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     restaurant_id INTEGER                           NOT NULL,

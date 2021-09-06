@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.forsh.voting_system_for_restaurants.View;
-import ru.forsh.voting_system_for_restaurants.model.Dish;
+import ru.forsh.voting_system_for_restaurants.model.Meal;
 import ru.forsh.voting_system_for_restaurants.repository.DishRepository;
 
 import java.net.URI;
@@ -34,23 +34,23 @@ public class DishAdminRestController {
 
     @Cacheable("dishes")
     @GetMapping
-    public List<Dish> getAll(@PathVariable int restaurantId) {
+    public List<Meal> getAll(@PathVariable int restaurantId) {
         log.info("getAll dishes for restaurantId={}", restaurantId);
         return dishRepository.getAll(restaurantId);
     }
 
     @GetMapping("/{id}")
-    public Dish get(@PathVariable int id) {
+    public Meal get(@PathVariable int id) {
         log.info("get dish with id={}", id);
         return checkNotFoundWithId(dishRepository.get(id), id);
     }
 
     @CacheEvict(value = "dishes", allEntries = true)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> createWithLocation(@Validated(View.Web.class) @RequestBody Dish dish, @PathVariable int restaurantId) {
-        log.info("create {}", dish);
-        checkNew(dish);
-        Dish created = dishRepository.save(dish, restaurantId);
+    public ResponseEntity<Meal> createWithLocation(@Validated(View.Web.class) @RequestBody Meal meal, @PathVariable int restaurantId) {
+        log.info("create {}", meal);
+        checkNew(meal);
+        Meal created = dishRepository.save(meal, restaurantId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/restaurants/" + restaurantId + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -59,10 +59,10 @@ public class DishAdminRestController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @CacheEvict(value = "dishes", allEntries = true)
-    public void update(@Validated(View.Web.class) @RequestBody Dish dish, @PathVariable int id, @PathVariable int restaurantId) {
-        log.info("update dish {} with id={} to restaurant with id={}", dish, id, restaurantId);
-        assureIdConsistent(dish, id);
-        checkNotFoundWithId(dishRepository.save(dish, restaurantId), dish.getId());
+    public void update(@Validated(View.Web.class) @RequestBody Meal meal, @PathVariable int id, @PathVariable int restaurantId) {
+        log.info("update dish {} with id={} to restaurant with id={}", meal, id, restaurantId);
+        assureIdConsistent(meal, id);
+        checkNotFoundWithId(dishRepository.save(meal, restaurantId), meal.getId());
     }
 
     @DeleteMapping("/{id}")

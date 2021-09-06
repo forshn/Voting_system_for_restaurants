@@ -20,20 +20,20 @@ public class Menu extends AbstractBaseEntity {
     private LocalDate added;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
-    private Set<Dish> dishes;
+    private Set<Meal> meals;
 
     public Menu() {
     }
 
-    public Menu(@NotNull Restaurant restaurant, @NotNull LocalDate added, Set<Dish> dishes) {
-        this(null, restaurant, added, dishes);
+    public Menu(@NotNull Restaurant restaurant, @NotNull LocalDate added, Set<Meal> meals) {
+        this(null, restaurant, added, meals);
     }
 
-    public Menu(Integer id, @NotNull Restaurant restaurant, @NotNull LocalDate added, Set<Dish> dishes) {
+    public Menu(Integer id, @NotNull Restaurant restaurant, @NotNull LocalDate added, Set<Meal> meals) {
         super(id);
         this.restaurant = restaurant;
         this.added = added;
-        this.dishes = dishes;
+        this.meals = meals;
     }
 
     public Restaurant getRestaurant() {
@@ -52,12 +52,12 @@ public class Menu extends AbstractBaseEntity {
         this.added = added;
     }
 
-    public Set<Dish> getDishes() {
-        return dishes;
+    public Set<Meal> getDishes() {
+        return meals;
     }
 
-    public void setDishes(Set<Dish> dishes) {
-        this.dishes = dishes;
+    public void setDishes(Set<Meal> meals) {
+        this.meals = meals;
     }
 
     @Override
@@ -66,12 +66,12 @@ public class Menu extends AbstractBaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Menu menu = (Menu) o;
-        return restaurant.equals(menu.restaurant) && added.equals(menu.added) && Objects.equals(dishes, menu.dishes);
+        return restaurant.equals(menu.restaurant) && added.equals(menu.added) && Objects.equals(meals, menu.meals);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), restaurant, added, dishes);
+        return Objects.hash(super.hashCode(), restaurant, added, meals);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Menu extends AbstractBaseEntity {
                 "id=" + id +
                 ", restaurant=" + restaurant +
                 ", added=" + added +
-                ", dishes=" + dishes +
+                ", meals=" + meals +
                 '}';
     }
 }

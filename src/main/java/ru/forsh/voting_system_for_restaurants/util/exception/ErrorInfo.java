@@ -2,7 +2,7 @@ package ru.forsh.voting_system_for_restaurants.util.exception;
 
 public class ErrorInfo {
     private final String url;
-    private final ru.forsh.voting_system_for_restaurants.util.exception.ErrorInfo type;
+    private final ErrorType type;
     private final String typeMessage;
     private final String[] details;
 

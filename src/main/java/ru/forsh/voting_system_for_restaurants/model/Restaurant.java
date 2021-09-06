@@ -19,7 +19,7 @@ public class Restaurant extends AbstractNamedEntity {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @JsonManagedReference
-    private Set<Dish> dishes;
+    private Set<Meal> meals;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private List<Vote> votes;
@@ -31,22 +31,22 @@ public class Restaurant extends AbstractNamedEntity {
         this(null, name, null);
     }
 
-    public Restaurant(Integer id, String name, Set<Dish> dishes) {
+    public Restaurant(Integer id, String name, Set<Meal> meals) {
         super(id, name);
         this.name = name;
-        this.dishes = dishes;
+        this.meals = meals;
     }
 
     public Restaurant(Restaurant r) {
-        this(r.getId(), r.getName(), r.getDishes());
+        this(r.getId(), r.getName(), r.getMeals());
     }
 
-    public Set<Dish> getDishes() {
-        return dishes;
+    public Set<Meal> getMeals() {
+        return meals;
     }
 
-    public void setDishes(Set<Dish> dishes) {
-        this.dishes = dishes;
+    public void setDishes(Set<Meal> meals) {
+        this.meals = meals;
     }
 
     @Override

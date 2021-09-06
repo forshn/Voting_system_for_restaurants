@@ -17,12 +17,12 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @Query("DELETE FROM Restaurant r WHERE r.id=:id")
     int delete(@Param("id") int id);
 
-    @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.dishes WHERE r.id =:id")
+    @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.meals WHERE r.id =:id")
     Restaurant getWithDishes(@Param("id") int id);
 
     @Query("""
             SELECT r FROM Restaurant r 
-            LEFT JOIN FETCH r.dishes d            
+            LEFT JOIN FETCH r.meals d            
             WHERE r.id =:id AND d.added=:date
             ORDER BY d.added DESC
             """)
@@ -30,7 +30,7 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
 
     @Query("""
             SELECT DISTINCT r FROM Restaurant r 
-            LEFT JOIN FETCH r.dishes d 
+            LEFT JOIN FETCH r.meals d 
             WHERE d.added=:date
             ORDER BY r.name
             """)

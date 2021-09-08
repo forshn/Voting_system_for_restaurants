@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.lang.Nullable;
 import ru.forsh.voting_system_for_restaurants.model.Restaurant;
-import ru.forsh.voting_system_for_restaurants.repository.DishRepository;
+import ru.forsh.voting_system_for_restaurants.repository.MealRepository;
 import ru.forsh.voting_system_for_restaurants.repository.RestaurantRepository;
 
 import java.time.LocalDate;
@@ -22,7 +22,7 @@ public abstract class AbstractRestaurantController {
     protected RestaurantRepository repository;
 
     @Autowired
-    protected DishRepository dishRepository;
+    protected MealRepository mealRepository;
 
     public Restaurant get(int id) {
         log.info("get restaurant with id={}", id);
@@ -54,18 +54,18 @@ public abstract class AbstractRestaurantController {
         return repository.getAll();
     }
 
-    public Restaurant getWithDishes(int id, @Nullable LocalDate date) {
+    public Restaurant getWithMeals(int id, @Nullable LocalDate date) {
         if (date == null) {
-            log.info("getWithDishes with id={}", id);
-            return repository.getWithDishes(id);
+            log.info("getWithMeals with id={}", id);
+            return repository.getWithMeals(id);
         }
-        log.info("getWithDishesByDate={} with id={}", date, id);
-        return repository.getWithDishesByDate(id, date);
+        log.info("getWithMealsByDate={} with id={}", date, id);
+        return repository.getWithMealsByDate(id, date);
     }
 
     @Cacheable("restaurants")
-    public List<Restaurant> getAllWithDishesByDate(LocalDate date) {
-        log.info("getAllWithDishesByDate={}", date);
-        return repository.getAllWithDishesByDate(date);
+    public List<Restaurant> getAllWithMealsByDate(LocalDate date) {
+        log.info("getAllWithMealsByDate={}", date);
+        return repository.getAllWithMealsByDate(date);
     }
 }

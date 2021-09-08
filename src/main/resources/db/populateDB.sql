@@ -24,21 +24,17 @@ VALUES ('Ресторан'),
        ('Закусочная');
 
 INSERT INTO meal (name, price, restaurant_id, added)
-VALUES ('Тако', 500, 100002, CURRENT_DATE),
-       ('Буррито', 760, 100002, CURRENT_DATE),
-       ('Гуакамоле', 450, 100003, CURRENT_DATE),
-       ('Стейк из акулы', 850, 100003, CURRENT_DATE),
-       ('Мраморная говядина', 730, 100003, CURRENT_DATE),
-       ('Мисо суп', 300, 100004, CURRENT_DATE),
-       ('Паста Карбонара', 600, 100004, CURRENT_DATE),
-       ('Гренки', 150, 100004, CURRENT_DATE),
-       ('Салат Цезарь', 400, 100004, CURRENT_DATE),
-       ('Вчерашний суп', 500, 100002, CURRENT_DATE),
-       ('Вчерашние гренки', 150, 100002, CURRENT_DATE - 1),
-       ('Вчерашний гуакамоле', 450, 100003, CURRENT_DATE - 1),
-       ('Вчерашний буррито', 760, 100003, CURRENT_DATE - 1),
-       ('Вчерашний тако', 500, 100003, CURRENT_DATE - 1);
+VALUES ('Тако', 1000, 100002, CURRENT_DATE),
+       ('Буррито', 300, 100002, CURRENT_DATE),
+       ('Гуакамоле', 400, 100003, CURRENT_DATE),
+       ('Стейк из акулы', 180, 100003, CURRENT_DATE),
+       ('Мраморная говядина', 150, 100003, CURRENT_DATE),
+       ('Мисо суп', 800, 100004, CURRENT_DATE),
+       ('Гренки', 550, 100004, CURRENT_DATE),
+       ('Пицца', 700, 100004, CURRENT_DATE),
+       ('Паста Карбонара', 450, 100004, CURRENT_DATE),
+       ('Вчерашний буррито', 500, 100002, CURRENT_DATE - 1 DAY),
+       ('Вчерашний тако', 150, 100002, CURRENT_DATE - 1 DAY);
 
 INSERT INTO vote (restaurant_id, user_id)
 VALUES (100002, 100000);
-

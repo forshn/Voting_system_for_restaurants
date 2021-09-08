@@ -1,4 +1,4 @@
-package ru.forsh.voting_system_for_restaurants.web.dish;
+package ru.forsh.voting_system_for_restaurants.web.meal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import static ru.forsh.voting_system_for_restaurants.UserTestData.admin;
 
 public class MealRestControllerTest extends AbstractControllerTest {
 
-    static final String REST_URL = "/rest/admin/restaurants/" + RESTAURANT_1_ID + "/dishes";
+    static final String REST_URL = "/rest/admin/restaurants/" + RESTAURANT_1_ID + "/meals";
 
     @Autowired
     private MealAdminRestController controller;
@@ -94,7 +94,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void getAll() throws Exception {
-        perform(MockMvcRequestBuilders.get("/rest/admin/restaurants/" + RESTAURANT_2_ID + "/dishes")
+        perform(MockMvcRequestBuilders.get("/rest/admin/restaurants/" + RESTAURANT_2_ID + "/meals")
                 .with(userHttpBasic(admin)))
                 .andExpect(status().isOk())
                 .andDo(print())

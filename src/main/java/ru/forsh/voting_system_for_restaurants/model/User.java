@@ -1,13 +1,13 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import org.springframework.util.CollectionUtils;
 import ru.forsh.voting_system_for_restaurants.HasIdAndEmail;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
@@ -41,14 +41,6 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Vote> votes;
-
-    public List<Vote> getVotes() {
-        return votes;
-    }
-
-    public void setVotes(List<Vote> votes) {
-        this.votes = votes;
-    }
 
     public User() {
     }

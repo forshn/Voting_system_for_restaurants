@@ -18,7 +18,7 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     int delete(@Param("id") int id);
 
     @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.meals WHERE r.id =:id")
-    Restaurant getWithDishes(@Param("id") int id);
+    Restaurant getWithMeals(@Param("id") int id);
 
     @Query("""
             SELECT r FROM Restaurant r 
@@ -26,7 +26,7 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
             WHERE r.id =:id AND d.added=:date
             ORDER BY d.added DESC
             """)
-    Restaurant getWithDishesByDate(@Param("id") int id, @Param("date") LocalDate date);
+    Restaurant getWithMealsByDate(@Param("id") int id, @Param("date") LocalDate date);
 
     @Query("""
             SELECT DISTINCT r FROM Restaurant r 
@@ -34,5 +34,5 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
             WHERE d.added=:date
             ORDER BY r.name
             """)
-    List<Restaurant> getAllWithDishesByDate(@Param("date") LocalDate date);
+    List<Restaurant> getAllWithMealsByDate(@Param("date") LocalDate date);
 }

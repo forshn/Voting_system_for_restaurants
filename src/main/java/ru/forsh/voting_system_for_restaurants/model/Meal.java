@@ -1,7 +1,6 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
@@ -9,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import ru.forsh.voting_system_for_restaurants.util.DateTimeUtil;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 import static java.time.LocalDate.now;
@@ -75,11 +75,13 @@ public class Meal extends AbstractNamedEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Meal meal = (Meal) o;
-        return price == meal.price && restaurant.equals(meal.restaurant) && added.equals(meal.added);
+    public String toString() {
+        return "Meal{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", restaurant=" + restaurant +
+                ", added=" + added +
+                '}';
     }
 }

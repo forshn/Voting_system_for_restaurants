@@ -10,7 +10,7 @@ import ru.forsh.voting_system_for_restaurants.model.Meal;
 import java.util.List;
 
 @Transactional(readOnly = true)
-public interface CrudDishRepository extends JpaRepository<Meal, Integer> {
+public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
     @Modifying
     @Transactional
     @Query("DELETE FROM Meal d WHERE d.id=:id")

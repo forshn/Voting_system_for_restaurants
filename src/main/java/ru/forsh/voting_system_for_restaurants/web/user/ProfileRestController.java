@@ -1,6 +1,5 @@
 package ru.forsh.voting_system_for_restaurants.web.user;
 
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.forsh.voting_system_for_restaurants.model.User;
 import ru.forsh.voting_system_for_restaurants.to.UserTo;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 import static ru.forsh.voting_system_for_restaurants.web.SecurityUtil.authUserId;

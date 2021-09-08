@@ -83,7 +83,7 @@ public abstract class AbstractUserController {
     protected void validateBeforeUpdate(HasId user, int id) throws BindException {
         assureIdConsistent(user, id);
         DataBinder binder = new DataBinder(user);
-        binder.addValidators(emailValidator, validator);
+        binder.addValidators(emailValidator, (org.springframework.validation.Validator) validator);
         binder.validate(View.Web.class);
         if (binder.getBindingResult().hasErrors()) {
             throw new BindException(binder.getBindingResult());

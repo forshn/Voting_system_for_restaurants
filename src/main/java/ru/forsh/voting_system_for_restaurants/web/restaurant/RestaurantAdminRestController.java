@@ -55,7 +55,7 @@ public class RestaurantAdminRestController extends AbstractRestaurantController 
     }
 
     @GetMapping("/{id}/menu")
-    public Restaurant getWithDishes(@PathVariable int id, @Nullable @RequestParam LocalDate date) {
-        return super.getWithDishes(id, date);
+    public Restaurant getWithMeals(@PathVariable int id, @Nullable @RequestParam LocalDate date) {
+        return super.getWithMeals(id, date);
     }
 }

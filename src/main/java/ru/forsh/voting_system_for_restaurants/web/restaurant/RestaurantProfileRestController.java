@@ -15,7 +15,7 @@ public class RestaurantProfileRestController extends AbstractRestaurantControlle
     static final String REST_URL = "/rest/restaurants/menus";
 
     @GetMapping
-    public List<Restaurant> getAllWithDishesForToday() {
-        return super.getAllWithDishesByDate(LocalDate.now());
+    public List<Restaurant> getAllWithMealsForToday() {
+        return super.getAllWithMealsByDate(LocalDate.now());
     }
 }

@@ -1,8 +1,5 @@
 package ru.forsh.voting_system_for_restaurants.web;
 
-import jakarta.servlet.http.HttpServletRequest;
-import ru.forsh.voting_system_for_restaurants.util.exception.*;
-import ru.forsh.voting_system_for_restaurants.util.ValidationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -15,6 +12,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import ru.forsh.voting_system_for_restaurants.util.ValidationUtil;
+import ru.forsh.voting_system_for_restaurants.util.exception.ErrorInfo;
+import ru.forsh.voting_system_for_restaurants.util.exception.ErrorType;
+import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 import static ru.forsh.voting_system_for_restaurants.util.exception.ErrorType.*;

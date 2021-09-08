@@ -3,6 +3,7 @@ package ru.forsh.voting_system_for_restaurants.web.user;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.forsh.voting_system_for_restaurants.model.User;
@@ -19,6 +20,7 @@ import static ru.forsh.voting_system_for_restaurants.TestUtil.userHttpBasic;
 import static ru.forsh.voting_system_for_restaurants.UserTestData.*;
 import static ru.forsh.voting_system_for_restaurants.util.exception.ErrorType.VALIDATION_ERROR;
 import static ru.forsh.voting_system_for_restaurants.web.user.ProfileRestController.REST_URL;
+
 
 class ProfileRestControllerTest extends AbstractControllerTest {
 
@@ -67,7 +69,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void update() throws Exception {
-        UserTo updatedTo = new UserTo(null, "newUser", "mail@mail.ru", "newPassword");
+        UserTo updatedTo = new UserTo(null, "newUser", "mail@yandex.ru", "newPassword");
         perform(MockMvcRequestBuilders.put(REST_URL).contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(user))
                 .content(JsonUtil.writeValue(updatedTo)))

@@ -32,7 +32,7 @@
         </property>
     </bean>
 
-    <context:component-scan base-package="ru.forsh.**.web"/>
+    <context:component-scan base-package="ru.forsh.voting_system_for_restaurants.web"/>
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
         <property name="defaultLocale" value="ru"/>

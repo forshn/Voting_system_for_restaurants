@@ -1,18 +1,17 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
     @NotBlank
-    @Size(min = 2, max = 50)
+    @Size(min = 2, max = 100)
     @Column(name = "name", nullable = false)
     protected String name;
 

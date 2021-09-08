@@ -1,4 +1,4 @@
-package ru.forsh.voting_system_for_restaurants.web.dish;
+package ru.forsh.voting_system_for_restaurants.web.meal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.forsh.voting_system_for_restaurants.View;
 import ru.forsh.voting_system_for_restaurants.model.Meal;
-import ru.forsh.voting_system_for_restaurants.repository.DishRepository;
+import ru.forsh.voting_system_for_restaurants.repository.MealRepository;
 
 import java.net.URI;
 import java.util.List;
@@ -26,23 +26,23 @@ public class MealAdminRestController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    private final DishRepository dishRepository;
+    private final MealRepository mealRepository;
 
-    public MealAdminRestController(DishRepository dishRepository) {
-        this.dishRepository = dishRepository;
+    public MealAdminRestController(MealRepository mealRepository) {
+        this.mealRepository = mealRepository;
     }
 
     @Cacheable("meals")
     @GetMapping
     public List<Meal> getAll(@PathVariable int restaurantId) {
         log.info("getAll meals for restaurantId={}", restaurantId);
-        return dishRepository.getAll(restaurantId);
+        return mealRepository.getAll(restaurantId);
     }
 
     @GetMapping("/{id}")
     public Meal get(@PathVariable int id) {
         log.info("get meal with id={}", id);
-        return checkNotFoundWithId(dishRepository.get(id), id);
+        return checkNotFoundWithId(mealRepository.get(id), id);
     }
 
     @CacheEvict(value = "meals", allEntries = true)
@@ -50,7 +50,7 @@ public class MealAdminRestController {
     public ResponseEntity<Meal> createWithLocation(@Validated(View.Web.class) @RequestBody Meal meal, @PathVariable int restaurantId) {
         log.info("create {}", meal);
         checkNew(meal);
-        Meal created = dishRepository.save(meal, restaurantId);
+        Meal created = mealRepository.save(meal, restaurantId);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/restaurants/" + restaurantId + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -63,7 +63,7 @@ public class MealAdminRestController {
     public void update(@Validated(View.Web.class) @RequestBody Meal meal, @PathVariable int id, @PathVariable int restaurantId) {
         log.info("update meal {} with id={} to restaurant with id={}", meal, id, restaurantId);
         assureIdConsistent(meal, id);
-        checkNotFoundWithId(dishRepository.save(meal, restaurantId), meal.id());
+        checkNotFoundWithId(mealRepository.save(meal, restaurantId), meal.id());
     }
 
     @DeleteMapping("/{id}")
@@ -71,6 +71,6 @@ public class MealAdminRestController {
     @CacheEvict(value = "meals", allEntries = true)
     public void delete(@PathVariable int id) {
         log.info("delete meal with id={}", id);
-        checkNotFoundWithId(dishRepository.delete(id), id);
+        checkNotFoundWithId(mealRepository.delete(id), id);
     }
 }

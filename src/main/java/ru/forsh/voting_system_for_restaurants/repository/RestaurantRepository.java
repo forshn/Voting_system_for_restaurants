@@ -33,20 +33,19 @@ public class RestaurantRepository {
         return crudRestaurantRepository.delete(id) != 0;
     }
 
-    // without dishes
     public List<Restaurant> getAll() {
         return crudRestaurantRepository.findAll(SORT_NAME);
     }
 
-    public Restaurant getWithDishes(int id) {
-        return crudRestaurantRepository.getWithDishes(id);
+    public Restaurant getWithMeals(int id) {
+        return crudRestaurantRepository.getWithMeals(id);
     }
 
-    public Restaurant getWithDishesByDate(int id, LocalDate date) {
-        return crudRestaurantRepository.getWithDishesByDate(id, date);
+    public Restaurant getWithMealsByDate(int id, LocalDate date) {
+        return crudRestaurantRepository.getWithMealsByDate(id, date);
     }
 
-    public List<Restaurant> getAllWithDishesByDate(LocalDate date) {
-        return crudRestaurantRepository.getAllWithDishesByDate(date);
+    public List<Restaurant> getAllWithMealsByDate(LocalDate date) {
+        return crudRestaurantRepository.getAllWithMealsByDate(date);
     }
 }

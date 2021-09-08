@@ -1,6 +1,6 @@
 package ru.forsh.voting_system_for_restaurants;
 
-import jakarta.validation.groups.Default;
+import javax.validation.groups.Default;
 
 public class View {
     public interface Web extends Default {

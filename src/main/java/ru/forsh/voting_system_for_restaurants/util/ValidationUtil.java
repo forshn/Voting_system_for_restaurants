@@ -1,14 +1,14 @@
 package ru.forsh.voting_system_for_restaurants.util;
 
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.*;
 import org.slf4j.Logger;
 import ru.forsh.voting_system_for_restaurants.HasId;
 import ru.forsh.voting_system_for_restaurants.util.exception.ErrorType;
 import ru.forsh.voting_system_for_restaurants.util.exception.IllegalRequestDataException;
 import ru.forsh.voting_system_for_restaurants.util.exception.NotFoundException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.*;
 import java.util.Set;
 
 public class ValidationUtil {

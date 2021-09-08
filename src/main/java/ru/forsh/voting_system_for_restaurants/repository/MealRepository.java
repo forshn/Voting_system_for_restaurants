@@ -7,12 +7,12 @@ import ru.forsh.voting_system_for_restaurants.model.Meal;
 import java.util.List;
 
 @Repository
-public class DishRepository {
-    private final CrudDishRepository crudDishRepository;
+public class MealRepository {
+    private final CrudMealRepository crudDishRepository;
 
     private final CrudRestaurantRepository crudRestaurantRepository;
 
-    public DishRepository(CrudDishRepository crudDishRepository, CrudRestaurantRepository crudRestaurantRepository) {
+    public MealRepository(CrudMealRepository crudDishRepository, CrudRestaurantRepository crudRestaurantRepository) {
         this.crudDishRepository = crudDishRepository;
         this.crudRestaurantRepository = crudRestaurantRepository;
     }
@@ -22,7 +22,7 @@ public class DishRepository {
         if (!meal.isNew() && get(meal.getId()) == null) {
             return null;
         }
-        meal.setRestaurant(crudRestaurantRepository.getById(restaurantId));
+        meal.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
         return crudDishRepository.save(meal);
     }
 

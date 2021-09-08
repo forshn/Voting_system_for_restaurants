@@ -1,5 +1,6 @@
 package ru.forsh.voting_system_for_restaurants.service;
 
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,5 +1,6 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
+import lombok.Data;
 import org.springframework.util.CollectionUtils;
 import ru.forsh.voting_system_for_restaurants.HasIdAndEmail;
 
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
+@Data
 @Table(name = "users")
 public class User extends AbstractNamedEntity implements HasIdAndEmail {
 
@@ -69,64 +71,5 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
-    }
-
-    public Date getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(Date registered) {
-        this.registered = registered;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email=" + email +
-                ", name=" + name +
-                ", enabled=" + enabled +
-                ", roles=" + roles +
-                '}';
     }
 }

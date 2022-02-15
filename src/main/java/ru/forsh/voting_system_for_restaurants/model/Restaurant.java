@@ -1,6 +1,7 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -13,6 +14,7 @@ import java.util.Set;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
+@Data
 @Table(name = "restaurant")
 public class Restaurant extends AbstractNamedEntity {
 
@@ -39,21 +41,5 @@ public class Restaurant extends AbstractNamedEntity {
 
     public Restaurant(Restaurant r) {
         this(r.getId(), r.getName(), r.getMeals());
-    }
-
-    public Set<Meal> getMeals() {
-        return meals;
-    }
-
-    public void setMeals(Set<Meal> meals) {
-        this.meals = meals;
-    }
-
-    @Override
-    public String toString() {
-        return "restaurant{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

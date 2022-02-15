@@ -1,5 +1,7 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
+import lombok.Data;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -8,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @MappedSuperclass
+@Data
 @Access(AccessType.FIELD)
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
     @NotBlank
@@ -23,16 +26,4 @@ public abstract class AbstractNamedEntity extends AbstractBaseEntity {
         this.name = name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + (name);
-    }
 }

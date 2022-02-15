@@ -1,6 +1,7 @@
 package ru.forsh.voting_system_for_restaurants.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import static java.time.LocalDate.now;
 
 @Entity
+@Data
 @Table(name = "meal")
 public class Meal extends AbstractNamedEntity {
 
@@ -50,38 +52,4 @@ public class Meal extends AbstractNamedEntity {
         this(d.getId(), d.getName(), d.getPrice(), d.getAdded(), d.getRestaurant());
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public LocalDate getAdded() {
-        return added;
-    }
-
-    public void setAdded(LocalDate added) {
-        this.added = added;
-    }
-
-    @Override
-    public String toString() {
-        return "Meal{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", restaurant=" + restaurant +
-                ", added=" + added +
-                '}';
-    }
 }

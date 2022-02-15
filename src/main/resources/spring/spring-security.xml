@@ -14,6 +14,7 @@
     </http>
 
     <beans:bean name="noopEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
+
     <authentication-manager>
         <authentication-provider user-service-ref="userService">
             <password-encoder ref="noopEncoder"/>

@@ -22,6 +22,7 @@ import static ru.forsh.voting_system_for_restaurants.UserTestData.NOT_FOUND;
 import static ru.forsh.voting_system_for_restaurants.UserTestData.admin;
 import static ru.forsh.voting_system_for_restaurants.web.restaurant.RestaurantAdminRestController.REST_URL;
 
+
 public class RestaurantRestControllerTest extends AbstractControllerTest {
 
     @Autowired

@@ -8,12 +8,12 @@ import java.util.List;
 
 @Repository
 public class MealRepository {
-    private final CrudMealRepository crudDishRepository;
+    private final CrudMealRepository crudMealRepository;
 
     private final CrudRestaurantRepository crudRestaurantRepository;
 
-    public MealRepository(CrudMealRepository crudDishRepository, CrudRestaurantRepository crudRestaurantRepository) {
-        this.crudDishRepository = crudDishRepository;
+    public MealRepository(CrudMealRepository crudMealRepository, CrudRestaurantRepository crudRestaurantRepository) {
+        this.crudMealRepository = crudMealRepository;
         this.crudRestaurantRepository = crudRestaurantRepository;
     }
 
@@ -23,18 +23,18 @@ public class MealRepository {
             return null;
         }
         meal.setRestaurant(crudRestaurantRepository.getOne(restaurantId));
-        return crudDishRepository.save(meal);
+        return crudMealRepository.save(meal);
     }
 
     public boolean delete(int id) {
-        return crudDishRepository.delete(id) != 0;
+        return crudMealRepository.delete(id) != 0;
     }
 
     public Meal get(int id) {
-        return crudDishRepository.findById(id).orElse(null);
+        return crudMealRepository.findById(id).orElse(null);
     }
 
     public List<Meal> getAll(int restaurantId) {
-        return crudDishRepository.getAllByRestaurantId(restaurantId);
+        return crudMealRepository.getAllByRestaurantId(restaurantId);
     }
 }

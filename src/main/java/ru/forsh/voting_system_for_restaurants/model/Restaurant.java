@@ -12,12 +12,12 @@ import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
 
+
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Data
 @Table(name = "restaurant")
 public class Restaurant extends AbstractNamedEntity {
-
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @JsonManagedReference
@@ -41,5 +41,21 @@ public class Restaurant extends AbstractNamedEntity {
 
     public Restaurant(Restaurant r) {
         this(r.getId(), r.getName(), r.getMeals());
+    }
+
+    public Set<Meal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(Set<Meal> meals) {
+        this.meals = meals;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

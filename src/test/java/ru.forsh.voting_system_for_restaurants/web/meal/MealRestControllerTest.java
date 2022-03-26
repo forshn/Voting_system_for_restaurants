@@ -36,7 +36,7 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(admin)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MEAL_MATCHER.contentJson(MEAL_1));
+                .andExpect(MEAL_MATCHER.contentJson(meal1));
     }
 
     @Test
@@ -99,6 +99,6 @@ public class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MEAL_MATCHER.contentJson(MEAL_3, MEAL_4, MEAL_5));
+                .andExpect(MEAL_MATCHER.contentJson(meal3, meal4, meal5));
     }
 }

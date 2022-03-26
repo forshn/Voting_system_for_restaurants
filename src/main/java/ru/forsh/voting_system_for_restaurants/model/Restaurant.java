@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Set;
 
 
+
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
-@Data
 @Table(name = "restaurant")
 public class Restaurant extends AbstractNamedEntity {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
